@@ -1,5 +1,6 @@
 package com.example.demo.domain;
 
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import lombok.experimental.SuperBuilder;
@@ -12,8 +13,11 @@ import java.time.LocalDateTime;
 public abstract class AbstractComment {
     Integer id;
     String content;
-    LocalDateTime createdAt;
-    Integer score;
+    @Builder.Default
+    LocalDateTime createdAt = LocalDateTime.now();
+    @Builder.Default
+    Integer score = 0;
     User user;
-    Boolean isEdited;
+    @Builder.Default
+    Boolean isEdited = false;
 }

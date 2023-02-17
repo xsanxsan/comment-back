@@ -19,6 +19,7 @@ import static jakarta.persistence.GenerationType.IDENTITY;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CommentEntity {
+
     @Id
     @GeneratedValue(strategy = IDENTITY)
     private Integer id;
@@ -39,6 +40,15 @@ public class CommentEntity {
     @OneToMany(mappedBy = "comment", fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     private List<CommentReplyEntity> replies;
 
+    public CommentEntity(Comment comment) {
+        this.content = comment.getContent();
+        this.createdAt = comment.getCreatedAt();
+        this.score = comment.getScore();
+        this.user = new UserEntity(comment.getUser());
+        this.isEdited = comment.getIsEdited();
+        this.replies = comment.getReplies().stream().map(commentReply -> new CommentReplyEntity(commentReply, this)).toList();
+    }
+
     public Comment toDomain() {
         return Comment.builder()
                 .score(getScore())
@@ -49,5 +59,4 @@ public class CommentEntity {
                 .user(new User(getUser().getUsername(), getUser().getProfileImagePath()))
                 .build();
     }
-
 }

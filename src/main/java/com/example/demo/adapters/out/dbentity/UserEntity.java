@@ -1,5 +1,6 @@
 package com.example.demo.adapters.out.dbentity;
 
+import com.example.demo.domain.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -18,4 +19,9 @@ public class UserEntity {
     private String username;
     @Column(nullable = false)
     private String profileImagePath;
+
+    public UserEntity(User user) {
+        this.profileImagePath = user.getProfileImagePath();
+        this.username = user.getUsername();
+    }
 }

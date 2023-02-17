@@ -35,5 +35,11 @@ public class CommentRepository implements ICommentDependency {
         return commentReplyRepository.save(replyEntity).toDomain();
     }
 
+    @Override
+    public Comment saveComment(Comment comment) {
+        return commentRepository.save(new CommentEntity(comment))
+                .toDomain();
+    }
+
 
 }

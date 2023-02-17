@@ -1,5 +1,5 @@
-INSERT INTO app_user (id,username, profile_image_path) values(1, 'Xsan', '/fake/image.png');
-INSERT INTO comment (id, content, created_at, score, is_edited, user_id) values (1,'Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You`ve nailed the design and the responsiveness at various breakpoints works really well.',{ts '2023-02-1 18:47:52.69'},12, false, 1);--    "id": 1,
+INSERT INTO app_user (username, profile_image_path) values('Xsan', '/fake/image.png');
+INSERT INTO comment (content, created_at, score, is_edited, user_id) values ('Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You`ve nailed the design and the responsiveness at various breakpoints works really well.',{ts '2023-02-1 18:47:52.69'},12, false, 1);--    "id": 1,
 --    "content": "Impressive! Though it seems the drag feature could be improved. But overall it looks incredible. You've nailed the design and the responsiveness at various breakpoints works really well.",
 --    "createdAt": "1 month ago",
 --    "score": 12,

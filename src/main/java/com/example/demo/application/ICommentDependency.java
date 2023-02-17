@@ -8,6 +8,10 @@ import java.util.Optional;
 
 public interface ICommentDependency {
     List<Comment> getAllComments();
+
     Optional<Comment> getCommentById(Integer id);
+
     CommentReply addReply(CommentReply commentReply, Integer repliedCommentId);
+
+    Comment saveComment(Comment comment);
 }

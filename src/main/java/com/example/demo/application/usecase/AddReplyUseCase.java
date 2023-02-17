@@ -19,17 +19,17 @@ public class AddReplyUseCase {
         this.commentDependency = commentDependency;
     }
 
-    public CommentReply addReplyUseCase(@Valid AddReplyDto addReplyDto) {
-        commentDependency.getCommentById(addReplyDto.repliedCommentId).orElseThrow(CommentNotFoundException::new);
+    public CommentReply addReplyUseCase(@Valid AddReplyCommand addReplyCommand) {
+        commentDependency.getCommentById(addReplyCommand.getRepliedCommentId()).orElseThrow(CommentNotFoundException::new);
 
         var reply = CommentReply.builder()
-                .replyingTo(addReplyDto.replyingToUsername)
-                .content(addReplyDto.replyContent)
+                .replyingTo(addReplyCommand.getReplyingToUsername())
+                .content(addReplyCommand.getReplyContent())
                 .score(0)
                 .createdAt(LocalDateTime.now())
                 .isEdited(false)
                 .build();
 
-        return commentDependency.addReply(reply, addReplyDto.repliedCommentId);
+        return commentDependency.addReply(reply, addReplyCommand.getRepliedCommentId());
     }
 }

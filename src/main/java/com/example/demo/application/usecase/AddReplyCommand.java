@@ -2,16 +2,18 @@ package com.example.demo.application.usecase;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
+import lombok.Getter;
 
-public class AddReplyDto {
+@Getter
+public class AddReplyCommand {
     @NotBlank(message = "A comment cannot be empty")
-    String replyContent;
+    private String replyContent;
     @NotNull(message = "The reply must be linked to an existing comment")
-    Integer repliedCommentId;
+    private Integer repliedCommentId;
     @NotBlank(message = "The reply must reply to an existing user")
-    String replyingToUsername;
+    private String replyingToUsername;
 
-    public AddReplyDto(String replyContent, Integer repliedCommentId, String replyingToUsername) {
+    public AddReplyCommand(String replyContent, Integer repliedCommentId, String replyingToUsername) {
         this.replyContent = replyContent;
         this.repliedCommentId = repliedCommentId;
         this.replyingToUsername = replyingToUsername;

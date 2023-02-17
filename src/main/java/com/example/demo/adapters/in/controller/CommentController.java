@@ -1,8 +1,7 @@
 package com.example.demo.adapters.in.controller;
 
-import com.example.demo.application.usecase.AddReplyDto;
-import com.example.demo.application.usecase.AddReplyUseCase;
-import com.example.demo.application.usecase.GetAllCommentUseCase;
+import com.example.demo.adapters.in.dto.AddCommentDto;
+import com.example.demo.application.usecase.*;
 import com.example.demo.domain.Comment;
 import com.example.demo.domain.CommentReply;
 import com.example.demo.domain.User;
@@ -16,9 +15,12 @@ public class CommentController {
     private final AddReplyUseCase addReplyUseCase;
     private final GetAllCommentUseCase getAllCommentUseCase;
 
-    public CommentController(AddReplyUseCase addReplyUseCase, GetAllCommentUseCase getAllCommentUseCase) {
+    private final AddCommentUseCase addCommentUseCase;
+
+    public CommentController(AddReplyUseCase addReplyUseCase, GetAllCommentUseCase getAllCommentUseCase, AddCommentUseCase addCommentUseCase) {
         this.addReplyUseCase = addReplyUseCase;
         this.getAllCommentUseCase = getAllCommentUseCase;
+        this.addCommentUseCase = addCommentUseCase;
     }
 
     @CrossOrigin
@@ -29,8 +31,8 @@ public class CommentController {
 
     @CrossOrigin
     @PostMapping(value = "/comments")
-    public Comment addComment() {
-        return Comment.builder().score(2).id(10).content("content").isEdited(false).createdAt(LocalDateTime.now()).user(new User("username", "path/to/profile/pic.jpg")).build();
+    public Comment addComment(@RequestBody AddCommentDto addCommentDto) {
+        return addCommentUseCase.addCommentUseCase(new AddCommentCommand(addCommentDto.content()));
     }
 
     @CrossOrigin
@@ -48,6 +50,6 @@ public class CommentController {
     @CrossOrigin
     @PostMapping(value = "/comments/{id}/replies")
     public CommentReply addReply(@PathVariable("id") Integer commentId) {
-        return addReplyUseCase.addReplyUseCase(new AddReplyDto("fake content", commentId, "fakeUsername"));
+        return addReplyUseCase.addReplyUseCase(new AddReplyCommand("fake content", commentId, "fakeUsername"));
     }
 }

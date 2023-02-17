@@ -32,8 +32,8 @@ public class AddReplyUseCaseTests {
     @Test
     public void shouldThrowAnExceptionIfTheCommentRepliedToIsNotFound() {
         // Given
-        var addReplyDto = new AddReplyDto(null, null, "Xsan");
-        BDDMockito.given(commentDependency.getCommentById(addReplyDto.repliedCommentId))
+        var addReplyDto = new AddReplyCommand(null, null, "Xsan");
+        BDDMockito.given(commentDependency.getCommentById(addReplyDto.getRepliedCommentId()))
                 .willReturn(Optional.empty());
 
         // When
@@ -43,12 +43,12 @@ public class AddReplyUseCaseTests {
     @Test
     public void shouldAddReplyToComment() {
         // Given
-        var addReplyDto = new AddReplyDto("Reply content", 1, "Xsan");
-        BDDMockito.given(commentDependency.getCommentById(addReplyDto.repliedCommentId))
+        var addReplyDto = new AddReplyCommand("Reply content", 1, "Xsan");
+        BDDMockito.given(commentDependency.getCommentById(addReplyDto.getRepliedCommentId()))
                 .willReturn(
                         Optional.of(
                                 Comment.builder()
-                                        .id(addReplyDto.repliedCommentId)
+                                        .id(addReplyDto.getRepliedCommentId())
                                         .score(0)
                                         .content("Test content")
                                         .createdAt(LocalDateTime.of(2015,
@@ -60,7 +60,7 @@ public class AddReplyUseCaseTests {
                 );
         addReplyUseCase.addReplyUseCase(addReplyDto);
 
-        Mockito.verify(commentDependency, Mockito.times(1)).getCommentById(addReplyDto.repliedCommentId);
+        Mockito.verify(commentDependency, Mockito.times(1)).getCommentById(addReplyDto.getRepliedCommentId());
         Mockito.verify(commentDependency, Mockito.times(1)).addReply(any(), any());
     }
 
