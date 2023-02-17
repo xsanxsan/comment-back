@@ -14,4 +14,10 @@ public interface ICommentDependency {
     CommentReply addReply(CommentReply commentReply, Integer repliedCommentId);
 
     Comment saveComment(Comment comment);
+
+    void deleteCommentRepliesAndComment(Integer commentId);
+
+    Optional<CommentReply> getReplyById(Integer replyId);
+
+    void deleteCommentReply(Integer replyId);
 }

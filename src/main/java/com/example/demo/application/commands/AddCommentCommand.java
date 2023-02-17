@@ -1,4 +1,4 @@
-package com.example.demo.application.usecase;
+package com.example.demo.application.commands;
 
 import jakarta.validation.constraints.NotBlank;
 import lombok.AllArgsConstructor;

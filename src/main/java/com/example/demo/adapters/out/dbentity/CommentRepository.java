@@ -41,5 +41,22 @@ public class CommentRepository implements ICommentDependency {
                 .toDomain();
     }
 
+    @Override
+    public void deleteCommentRepliesAndComment(Integer commentId) {
+        commentRepository.deleteById(commentId);
+        commentRepository.flush();
+    }
+
+    @Override
+    public Optional<CommentReply> getReplyById(Integer replyId) {
+        return commentReplyRepository.findById(replyId).map(CommentReplyEntity::toDomain);
+    }
+
+    @Override
+    public void deleteCommentReply(Integer replyId) {
+        commentReplyRepository.deleteById(replyId);
+        commentRepository.flush();
+    }
+
 
 }

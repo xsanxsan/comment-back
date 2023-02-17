@@ -1,6 +1,7 @@
 package com.example.demo.application.usecase;
 
 import com.example.demo.application.ICommentDependency;
+import com.example.demo.application.commands.AddReplyCommand;
 import com.example.demo.domain.CommentReply;
 import com.example.demo.exceptions.CommentNotFoundException;
 import jakarta.validation.Valid;

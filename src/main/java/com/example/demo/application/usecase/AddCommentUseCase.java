@@ -1,6 +1,7 @@
 package com.example.demo.application.usecase;
 
 import com.example.demo.application.ICommentDependency;
+import com.example.demo.application.commands.AddCommentCommand;
 import com.example.demo.domain.Comment;
 import com.example.demo.domain.User;
 import jakarta.validation.Valid;
@@ -22,7 +23,7 @@ public class AddCommentUseCase {
                 .content(addCommentCommand.getContent())
                 .user(new User("Username", "path/to/image.jpg"))
                 .build();
-        
+
         return commentDependency.saveComment(newComment);
     }
 }
